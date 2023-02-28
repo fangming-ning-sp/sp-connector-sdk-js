@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  REF: ${{ github.event.inputs.tag || github.ref }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Test version
+        run: |
+          echo ${{ github.event.inputs.tag }}
+          echo ${{ github.ref }}
+          echo ${{ github.ref }}
+          echo "====="
+          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
