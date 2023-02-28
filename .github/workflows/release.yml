@@ -18,7 +18,6 @@ jobs:
         run: |
           echo ${{ github.event.inputs.tag }}
           echo ${{ github.ref }}
-          echo ${{ github.ref }}
           echo "====="
-          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+          echo $GITHUB_REF_NAME
+          echo ${{  github.ref_name }}
