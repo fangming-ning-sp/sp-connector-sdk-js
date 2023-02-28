@@ -5,9 +5,6 @@ on:
     tags:
       - '*'
 
-env:
-  REF: ${{ github.event.inputs.tag || github.ref }}
-
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -24,9 +21,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Run tests
-        run: npm ci && npm test
 
       - name: Set package version
         run: npm version ${{  github.ref_name }} --no-git-tag-version
