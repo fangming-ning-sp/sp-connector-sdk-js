@@ -12,12 +12,21 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
-    steps:
+    strategy:
+      matrix:
+        node-version: [ '16' ]
 
-      - name: Test version
-        run: |
-          echo ${{ github.event.inputs.tag }}
-          echo ${{ github.ref }}
-          echo "====="
-          echo $GITHUB_REF_NAME
-          echo ${{  github.ref_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run tests
+        run: npm ci && npm test
+
+      - name: Set package version
+        run: npm version ${{  github.ref_name }}
